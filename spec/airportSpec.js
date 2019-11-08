@@ -11,7 +11,7 @@ describe('Airport', function(){
 
   describe('Airport functionality', function(){
     it('Raises error on no planes', function(){
-    expect(airport.takeoff()).toEqual('No planes in airport');
+    expect(airport.takeoff()).toEqual('NO PLANES');
     });
 
     it('Can takeoff', function(){

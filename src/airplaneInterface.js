@@ -6,17 +6,13 @@ $(document).ready(function(){
   $('#takeoff').on('click', function(){
     airport.takeoff();
     updatePlanes();
-
+    airport.weatherChange();
   });
 
   $('#land').on('click', function(){
     airport.land(plane);
     updatePlanes();
-
-  });
-
-  $('#weathercheck').on('click', function(){
-    $('#currentweather').text(airport.checkWeather());
+    airport.weatherChange();
   });
 
   $('#cycleWeather').on('click', function(){
@@ -25,20 +21,19 @@ $(document).ready(function(){
   });
 
   function updatePlanes() {
-    $('#currentTotal').text(airport.planes.length)
+    $('#currentTotal').text(airport.planes.length);
+    $('#currentWeather').text(airport.weather);
     warning();
     airport.weatherChange();
   };
 
   function warning() {
-    if (airport.weather == 'hurricane' && airport.planes.length > 0) {
-        $('#warning').text('Your plane just crashed over the pacific killing ' + Math.floor(Math.random()*200) + ' people');
-    } else if (airport.planes.length == 0) {
-        $('#warning').text(airport.takeoff());
-    } else if (airport.planes.length == airport.capacity) {
-      $('#warning').text('Airport FULL');
+    if (airport.planes.length == airport.capacity) {
+      $('#warning').text(airport.land(plane));
+    } else if(airport.weather == 'hurricane' || airport.planes.length == 0){
+      $('#warning').text(airport.takeoff());
     } else {
       $('#warning').text('');
-    }
-  }
+    };
+  };
 });
