@@ -6,17 +6,15 @@ $(document).ready(function(){
   $('#takeoff').on('click', function(){
     airport.takeoff();
     updatePlanes();
-    airport.weatherChange();
   });
 
   $('#land').on('click', function(){
     airport.land(plane);
     updatePlanes();
-    airport.weatherChange();
   });
 
   $('#cycleWeather').on('click', function(){
-    airport.weatherChange();
+    updatePlanes();
     $('#currentweather').text(airport.checkWeather());
   });
 
@@ -28,7 +26,7 @@ $(document).ready(function(){
   };
 
   function warning() {
-    if (airport.planes.length == airport.capacity) {
+    if (airport.weather == 'hurricane' || airport.planes.length == airport.capacity) {
       $('#warning').text(airport.land(plane));
     } else if(airport.weather == 'hurricane' || airport.planes.length == 0){
       $('#warning').text(airport.takeoff());
